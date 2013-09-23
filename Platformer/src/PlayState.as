@@ -49,7 +49,7 @@ package
 		
 		private function gotTrophy(a:Player, b:FlxSprite):void
 		{
-			API.unlockMedal("The Trophy");
+			// API.unlockMedal("The Trophy");
 			FlxG.flash();
 			FlxG.play(Sources.Mp3Powerup, 0.7);
 			remove(trophy);
