@@ -1,28 +1,14 @@
 package
 {
-	import flash.display.Sprite;
-	import flash.events.Event;
-
-	[Frame(factoryClass = "Preloader")]
+	import org.flixel.*;
+	[SWF(width="640", height="480", backgroundColor="#000000")]
+	[Frame(factoryClass="Preloader")]
 	
-	public class Main extends Sprite
+	public class Main extends FlxGame
 	{
 		public function Main():void
 		{
-			if (stage)
-			{
-				init();
-			} else {
-				addEventListener(Event.ADDED_TO_STAGE, init);
-			}
-		}
-
-		private function init(e:Event = null):void
-		{
-			removeEventListener(Event.ADDED_TO_STAGE, init);
-			var game:Game = new Game;
-			addChild(game);
-			stage.focus = this;
+			super(320, 240, MenuState, 2);
 		}
 	}
 }
