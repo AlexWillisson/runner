@@ -1,11 +1,11 @@
 package
 {
 	import org.flixel.*;
-	import com.newgrounds.*;
 	
 	public class PlayState extends FlxState
 	{
-		private var background:FlxSprite;
+		//private var background:FlxSprite;
+		private var background:FlxBackdrop
 		private var map:FlxTilemap;
 		private var player:Player;
 		private var trophy:FlxSprite;
@@ -24,7 +24,8 @@ package
 			FlxG.framerate = 60;
 			FlxG.flashFramerate = 60;
 			
-			background = new FlxSprite(0, 0, Sources.ImgBackground); //CREATE BACKGROUND
+			//background = new FlxSprite(0, 0, Sources.ImgBackground); //CREATE BACKGROUND
+			background = new FlxBackdrop(Sources.ImgBackground, 0.8, 0.6, true, true)
 			add(background); //ADDING BACKGROUND TO THE STAGE AND MAKING IT VISIBLE
 			
 			map = new FlxTilemap(); //CREATING MAP
