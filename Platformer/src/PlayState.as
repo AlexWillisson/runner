@@ -6,9 +6,10 @@ package
 	{
 		//private var background:FlxSprite;
 		private var background:FlxBackdrop
-		private var map:FlxTilemap;
+		private var map1:FlxTilemap;
 		private var player:Player;
 		private var trophy:FlxSprite;
+		private var map2:FlxTilemap;
 		
 		public function PlayState():void
 		{
@@ -25,12 +26,18 @@ package
 			FlxG.flashFramerate = 60;
 			
 			//background = new FlxSprite(0, 0, Sources.ImgBackground); //CREATE BACKGROUND
-			background = new FlxBackdrop(Sources.ImgBackground, 0.8, 0.6, true, true)
+			background = new FlxBackdrop(Sources.ImgBackground, 0.8, 0.6, true, true); //endless background
 			add(background); //ADDING BACKGROUND TO THE STAGE AND MAKING IT VISIBLE
 			
-			map = new FlxTilemap(); //CREATING MAP
-			map.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16); //LOADING MAP
-			add(map); //ADDING MAP TO THE STAGE AND MAKING IT VISIBLE
+			map1 = new FlxTilemap(); //CREATING MAP
+			//map.auto = FlxTilemap.AUTO;
+			map1.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16); //LOADING MAP
+			add(map1); //ADDING MAP TO THE STAGE AND MAKING IT VISIBLE
+			map1.x = 0
+			
+			map2 = new FlxTilemap();
+			map2.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16);
+			map2.x = 12
 			
 			player = new Player(); //CREATING PLAYER
 			player.x = FlxG.width / 2;
@@ -40,12 +47,14 @@ package
 			super.create();
 
 		}
-		
+		var i:uint = 2;
 		override public function update():void
 		{
 			FlxG.camera.scroll.x += 1;
 			player.x += 1;
-			FlxG.collide(player, map); //MAKE BOTH COLLIDE
+			//map1.setTile(i++, 13, 1);
+			FlxG.collide(player, map1); //MAKE BOTH COLLIDE
+			FlxG.collide(player, map2);
 			super.update();
 		}
 		
