@@ -10,10 +10,11 @@ package
 		private var player:Player;
 		private var trophy:FlxSprite;
 		private var map2:FlxTilemap;
+		public var paused:FlxPaused;
 		
 		public function PlayState():void
 		{
-		
+			
 		}
 		
 		override public function create():void
@@ -43,19 +44,34 @@ package
 			player.x = FlxG.width / 2;
 			player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
-
+			
+			paused = new FlxPaused;	//adding pause functionality
 			super.create();
 
 		}
 		var i:uint = 2;
 		override public function update():void
 		{
-			FlxG.camera.scroll.x += 1;
-			player.x += 1;
-			//map1.setTile(i++, 13, 1);
-			FlxG.collide(player, map1); //MAKE BOTH COLLIDE
-			FlxG.collide(player, map2);
-			super.update();
+			if (!paused.showing)
+			{
+				FlxG.camera.scroll.x += 1;
+				player.x += 1;
+				FlxG.collide(player, map1); //MAKE BOTH COLLIDE
+				FlxG.collide(player, map2);
+			//Something to pause with
+				if (FlxG.keys.P)
+				{
+					//paused.showPaused();
+					paused = new FlxPaused;			
+					paused.showPaused();
+					add(paused);
+				}		
+			
+			} else
+			{
+				paused.update();
+			}
+			
 		}
 		
 	}
