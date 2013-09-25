@@ -5,7 +5,7 @@ package
 		//IMPORTING GRAPHICS (.PNG)
 		[Embed(source = 'org/flixel/data/private/graphics/background.png')] public static var ImgBackground:Class;
 		[Embed(source = 'org/flixel/data/private/graphics/map.png')] public static var ImgMap:Class;
-		[Embed(source = 'org/flixel/data/private/graphics/player.png')] public static var ImgPlayer:Class;
+		[Embed(source = 'SpriteTorso.png')] public static var ImgPlayer:Class;
 		[Embed(source = 'org/flixel/data/private/graphics/trophy.png')] public static var ImgTrophy:Class;
 		
 		//IMPORTING SOUNDS AND MUSIC (.MP3)
