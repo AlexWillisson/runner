@@ -9,9 +9,9 @@ package
 		private var map1:FlxTilemap;
 		private var player:Player;
 		private var firstleg:Limb;
-		private var trophy:FlxSprite;
 		private var map2:FlxTilemap;
 		public var paused:FlxPaused;
+		public var allowHills:Boolean;
 		
 		public function PlayState():void
 		{
@@ -29,6 +29,8 @@ package
 			background = new FlxBackdrop(Sources.ImgBackground, 0.8, 0.6, true, true); //endless background
 			add(background); //ADDING BACKGROUND TO THE STAGE AND MAKING IT VISIBLE
 			
+			allowHills = false;
+
 			map1 = new FlxTilemap(); //CREATING MAP
 			//map.auto = FlxTilemap.AUTO;
 			map1.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16); //LOADING MAP
@@ -69,6 +71,7 @@ package
 				if (FlxG.collide(player, firstleg)) {
 					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);
 					player.leg1 = true;
+					allowHills = true;
 					remove(firstleg);
 				}
 
