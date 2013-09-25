@@ -12,6 +12,8 @@ package
 		private var trophy:FlxSprite;
 		private var map2:FlxTilemap;
 		public var paused:FlxPaused;
+		private var i:uint = 0;
+		private var j:uint = 0;
 		
 		public function PlayState():void
 		{
@@ -43,6 +45,7 @@ package
 			player.x = FlxG.width / 3;
 			player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
+			FlxG.camera.follow(player);
 			
 			firstleg = new Limb(Sources.Leg);
 			firstleg.x = FlxG.width - 100;
@@ -53,13 +56,24 @@ package
 			super.create();
 
 		}
-		var i:uint = 2;
+		
 		override public function update():void
 		{
 			if (!paused.showing)
 			{
-				FlxG.camera.scroll.x += 1;
+				//FlxG.camera.scroll.x += 1;
 				// player.x += 1;
+				
+				if (player.x > 304) {
+					player.x -= 300;
+					map1.setTile(5, 13, i % 2);
+					map1.setTile(5, 12, i / 3);
+					i = (i + 1) % 4;
+					map1.setTile(13, 13, j / 2);
+					map1.setTile(14, 12, i%2);
+					j = (j + 1) % 3;
+				}
+				trace(player.x);
 				FlxG.collide(player, map1); //MAKE BOTH COLLIDE
 				FlxG.collide(player, map2);
 
