@@ -75,10 +75,10 @@ package
 					remove(firstleg);
 				}
 
-			//Something to pause with
+				super.update()
+
 				if (FlxG.keys.P)
 				{
-					//paused.showPaused();
 					paused = new FlxPaused;			
 					paused.showPaused();
 					add(paused);
@@ -88,9 +88,6 @@ package
 			{
 				paused.update();
 			}
-
-			super.update()
 		}
-		
 	}
 }
