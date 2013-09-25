@@ -10,7 +10,7 @@ package
 		private var player:Player;
 		private var firstleg:Limb;
 		private var map2:FlxTilemap;
-		public var paused:FlxPaused;
+		public var paused:Paused;
 		private var i:uint = 0;
 		private var j:uint = 0;
 		public var allowHills:Boolean;
@@ -55,7 +55,7 @@ package
 			firstleg.y = FlxG.height - 31;
 			add(firstleg);
 
-			paused = new FlxPaused;	//adding pause functionality
+			paused = new Paused;	//adding pause functionality
 			super.create();
 
 		}
@@ -98,7 +98,7 @@ package
 				}
 				if (FlxG.keys.P)
 				{
-					paused = new FlxPaused;			
+					paused = new Paused;			
 					paused.showPaused();
 					add(paused);
 				}		
