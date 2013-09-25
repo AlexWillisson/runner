@@ -41,6 +41,7 @@ package
 			
 			map2 = new FlxTilemap();
 			map2.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16);
+			add(map2);
 			map2.x = 12
 			
 			player = new Player(Sources.Torso); //CREATING PLAYER
@@ -75,7 +76,7 @@ package
 					map1.setTile(14, 12, i%2);
 					j = (j + 1) % 3;
 				}
-				trace(player.x);
+				
 				FlxG.collide(player, map1); //MAKE BOTH COLLIDE
 				FlxG.collide(player, map2);
 
