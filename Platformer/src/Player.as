@@ -20,7 +20,7 @@ package
 		{
 				velocity.x = 62.5; //SET SPEED
 				facing = RIGHT; //CHANGE FACING
-				play("walk")
+				play("walk");
 				super.update();
 		}
 	}
