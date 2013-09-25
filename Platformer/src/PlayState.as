@@ -11,12 +11,9 @@ package
 		private var firstleg:Limb;
 		private var map2:FlxTilemap;
 		public var paused:FlxPaused;
-<<<<<<< HEAD
 		private var i:uint = 0;
 		private var j:uint = 0;
-=======
 		public var allowHills:Boolean;
->>>>>>> c07a3a4bfe623a99ea6f4c9bf633948592e9fdd8
 		
 		public function PlayState():void
 		{
