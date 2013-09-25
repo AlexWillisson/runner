@@ -55,7 +55,7 @@ package
 			if (!paused.showing)
 			{
 				FlxG.camera.scroll.x += 1;
-				player.x += 1;
+				// player.x += 1;
 				FlxG.collide(player, map1); //MAKE BOTH COLLIDE
 				FlxG.collide(player, map2);
 			//Something to pause with
@@ -71,7 +71,8 @@ package
 			{
 				paused.update();
 			}
-			
+
+			super.update()
 		}
 		
 	}
