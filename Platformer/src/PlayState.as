@@ -45,13 +45,13 @@ package
 			map2.x = 12
 			
 			player = new Player(Sources.Torso); //CREATING PLAYER
-			player.x = FlxG.width / 3;
+			player.x = 35;
 			player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
 			FlxG.camera.follow(player);
 			
 			firstleg = new Limb(Sources.Leg);
-			firstleg.x = FlxG.width - 100;
+			firstleg.x = FlxG.width - 50;
 			firstleg.y = FlxG.height - 31;
 			add(firstleg);
 

@@ -20,7 +20,7 @@ package
 		
 		override public function update():void
 		{
-			velocity.x = 62.5; //SET SPEED
+			velocity.x = 100; //SET SPEED
 			facing = RIGHT; //CHANGE FACING
 			
 			//death conditions for left, right, and bottom of screen
