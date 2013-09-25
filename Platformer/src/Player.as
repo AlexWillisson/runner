@@ -4,6 +4,7 @@ package
 	
 	public class Player extends FlxSprite
 	{
+		public var leg1:Boolean;
 		
 		public function Player(sprite: Class):void
 		{
@@ -13,6 +14,8 @@ package
 			addAnimation("walk", [0, 1, 2, 1], 5/*frames per second*/);
 			addAnimation("jump", [3]);
 			acceleration.y = 300; //ADDING GRAVITY
+
+			leg1 = false;
 		}
 		
 		override public function update():void
@@ -28,7 +31,7 @@ package
 		private function movement():void
 		{
 			if (touching & DOWN) {
-				if (FlxG.keys.UP || FlxG.keys.W) {
+				if (leg1 && (FlxG.keys.UP || FlxG.keys.W)) {
 					velocity.y = -150;
 				} else {
 					play("walk");

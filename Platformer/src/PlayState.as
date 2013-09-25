@@ -8,6 +8,7 @@ package
 		private var background:FlxBackdrop
 		private var map1:FlxTilemap;
 		private var player:Player;
+		private var firstleg:Limb;
 		private var trophy:FlxSprite;
 		private var map2:FlxTilemap;
 		public var paused:FlxPaused;
@@ -39,10 +40,15 @@ package
 			map2.x = 12
 			
 			player = new Player(Sources.Torso); //CREATING PLAYER
-			player.x = FlxG.width / 2;
+			player.x = FlxG.width / 3;
 			player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
 			
+			firstleg = new Limb(Sources.Leg);
+			firstleg.x = FlxG.width - 100;
+			firstleg.y = FlxG.height - 31;
+			add(firstleg);
+
 			paused = new FlxPaused;	//adding pause functionality
 			super.create();
 
@@ -50,16 +56,22 @@ package
 		var i:uint = 2;
 		override public function update():void
 		{
-			if (FlxG.keys.Q) {
-				player.loadGraphic(Sources.OneLeg, true, true, 14, 15)
-			}
-
 			if (!paused.showing)
 			{
 				FlxG.camera.scroll.x += 1;
 				// player.x += 1;
 				FlxG.collide(player, map1); //MAKE BOTH COLLIDE
 				FlxG.collide(player, map2);
+
+				FlxG.collide(firstleg, map1); //MAKE BOTH COLLIDE
+				FlxG.collide(firstleg, map2);
+
+				if (FlxG.collide(player, firstleg)) {
+					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);
+					player.leg1 = true;
+					remove(firstleg);
+				}
+
 			//Something to pause with
 				if (FlxG.keys.P)
 				{
