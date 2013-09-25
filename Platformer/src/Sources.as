@@ -2,8 +2,8 @@ package
 {
 	public class Sources 
 	{		
-		[Embed(source = 'org/flixel/data/private/graphics/background.png')] public static var ImgBackground:Class;
-		[Embed(source = 'org/flixel/data/private/graphics/map.png')] public static var ImgMap:Class;
+		[Embed(source = 'background.png')] public static var ImgBackground:Class;
+		[Embed(source = 'map.png')] public static var ImgMap:Class;
 
 		[Embed(source = 'SpriteTorso.png')] public static var Torso:Class;
 		[Embed(source = 'SpriteLeg1.png')] public static var OneLeg:Class;
