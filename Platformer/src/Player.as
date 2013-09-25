@@ -5,10 +5,9 @@ package
 	public class Player extends FlxSprite
 	{
 		
-		public function Player():void
+		public function Player(sprite: Class):void
 		{
-			//LOADING GRAPHIC
-			loadGraphic(Sources.ImgPlayer, true, true, 14, 15);
+			loadGraphic(sprite, true, true, 14, 15);
 			//SETTING ANIMATIONS
 			addAnimation("idle"/*name of animation*/, [0]/*used frames*/);
 			addAnimation("walk", [0, 1, 2, 1], 5/*frames per second*/);
@@ -18,10 +17,25 @@ package
 		
 		override public function update():void
 		{
-				velocity.x = 62.5; //SET SPEED
-				facing = RIGHT; //CHANGE FACING
-				play("walk");
-				super.update();
+			velocity.x = 62.5; //SET SPEED
+			facing = RIGHT; //CHANGE FACING
+
+			movement();
+				
+			super.update();
+		}
+
+		private function movement():void
+		{
+			if (touching & DOWN) {
+				if (FlxG.keys.UP || FlxG.keys.W) {
+					velocity.y = -150;
+				} else {
+					play("walk");
+				}
+			} else {
+				play("jump");
+			}
 		}
 	}
 }

@@ -21,8 +21,6 @@ package
 		{
 			//STARTING THE GAME...
 			FlxG.flash(0);
-			FlxG.playMusic(Sources.Mp3Soundtrack, 0.7);
-			FlxG.music.fadeIn(3);
 			FlxG.framerate = 60;
 			FlxG.flashFramerate = 60;
 			
@@ -40,7 +38,7 @@ package
 			map2.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16);
 			map2.x = 12
 			
-			player = new Player(); //CREATING PLAYER
+			player = new Player(Sources.Torso); //CREATING PLAYER
 			player.x = FlxG.width / 2;
 			player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
@@ -52,6 +50,10 @@ package
 		var i:uint = 2;
 		override public function update():void
 		{
+			if (FlxG.keys.Q) {
+				player.loadGraphic(Sources.OneLeg, true, true, 14, 15)
+			}
+
 			if (!paused.showing)
 			{
 				FlxG.camera.scroll.x += 1;
