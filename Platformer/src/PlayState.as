@@ -9,11 +9,14 @@ package
 		private var map1:FlxTilemap;
 		private var player:Player;
 		private var firstleg:Limb;
-		private var trophy:FlxSprite;
 		private var map2:FlxTilemap;
 		public var paused:FlxPaused;
+<<<<<<< HEAD
 		private var i:uint = 0;
 		private var j:uint = 0;
+=======
+		public var allowHills:Boolean;
+>>>>>>> c07a3a4bfe623a99ea6f4c9bf633948592e9fdd8
 		
 		public function PlayState():void
 		{
@@ -31,6 +34,8 @@ package
 			background = new FlxBackdrop(Sources.ImgBackground, 0.8, 0.6, true, true); //endless background
 			add(background); //ADDING BACKGROUND TO THE STAGE AND MAKING IT VISIBLE
 			
+			allowHills = false;
+
 			map1 = new FlxTilemap(); //CREATING MAP
 			//map.auto = FlxTilemap.AUTO;
 			map1.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16); //LOADING MAP
@@ -83,13 +88,18 @@ package
 				if (FlxG.collide(player, firstleg)) {
 					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);
 					player.leg1 = true;
+					allowHills = true;
 					remove(firstleg);
 				}
 
-			//Something to pause with
+				super.update()
+			//Access the end screen by pressing comma
+				if (FlxG.keys.COMMA)
+				{
+					FlxG.switchState(new EndScreen());
+				}
 				if (FlxG.keys.P)
 				{
-					//paused.showPaused();
 					paused = new FlxPaused;			
 					paused.showPaused();
 					add(paused);
@@ -99,9 +109,6 @@ package
 			{
 				paused.update();
 			}
-
-			super.update()
 		}
-		
 	}
 }
