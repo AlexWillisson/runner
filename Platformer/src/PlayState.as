@@ -76,7 +76,11 @@ package
 				}
 
 				super.update()
-
+			//Access the end screen by pressing comma
+				if (FlxG.keys.COMMA)
+				{
+					FlxG.switchState(new EndScreen());
+				}
 				if (FlxG.keys.P)
 				{
 					paused = new FlxPaused;			
