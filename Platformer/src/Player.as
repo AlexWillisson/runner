@@ -22,7 +22,13 @@ package
 		{
 			velocity.x = 62.5; //SET SPEED
 			facing = RIGHT; //CHANGE FACING
-
+			
+			//death conditions for left, right, and bottom of screen
+			if ((x < 0) || (x > FlxG.width - width) || (y > FlxG.height))
+			{
+				FlxG.switchState(new MenuState());
+			}
+			
 			movement();
 				
 			super.update();
