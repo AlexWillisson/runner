@@ -9,7 +9,6 @@ package
 		private var map1:FlxTilemap;
 		private var player:Player;
 		private var firstleg:Limb;
-		private var map2:FlxTilemap;
 		public var paused:FlxPaused;
 		public var allowHills:Boolean;
 		
@@ -37,10 +36,10 @@ package
 			add(map1); //ADDING MAP TO THE STAGE AND MAKING IT VISIBLE
 			map1.x = 0
 			
-			map2 = new FlxTilemap();
-			map2.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16);
-			map2.x = 12
-			
+			for (var i = 0; i < 20; i++) {
+				map1.setTile (i, 14, 2);
+			}
+
 			player = new Player(Sources.Torso); //CREATING PLAYER
 			player.x = FlxG.width / 3;
 			player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
@@ -55,18 +54,19 @@ package
 			super.create();
 
 		}
-		var i:uint = 2;
+
 		override public function update():void
 		{
 			if (!paused.showing)
 			{
-				FlxG.camera.scroll.x += 1;
-				// player.x += 1;
-				FlxG.collide(player, map1); //MAKE BOTH COLLIDE
-				FlxG.collide(player, map2);
+				// FlxG.camera.scroll.x += 1;
 
-				FlxG.collide(firstleg, map1); //MAKE BOTH COLLIDE
-				FlxG.collide(firstleg, map2);
+				if (player.x > 310) {
+					player.x -= 300;
+				}
+
+				FlxG.collide(player, map1);
+				FlxG.collide(firstleg, map1);
 
 				if (FlxG.collide(player, firstleg)) {
 					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);
@@ -76,18 +76,18 @@ package
 				}
 
 				super.update()
-			//Access the end screen by pressing comma
+				//Access the end screen by pressing comma
 				if (FlxG.keys.COMMA)
 				{
 					FlxG.switchState(new EndScreen());
 				}
 				if (FlxG.keys.P)
 				{
-					paused = new FlxPaused;			
+					paused = new FlxPaused;
 					paused.showPaused();
 					add(paused);
-				}		
-			
+				}
+				
 			} else
 			{
 				paused.update();
