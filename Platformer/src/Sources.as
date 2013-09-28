@@ -10,6 +10,6 @@ package
 		
 		[Embed(source = 'legplaceholder.png')] public static var Leg:Class;
 
-		[Embed(source = 'org/flixel/data/private/texts/map.txt', mimeType = "application/octet-stream")] public static var TxtMap:Class;
+		[Embed(source = 'map.txt', mimeType = "application/octet-stream")] public static var TxtMap:Class;
 	}
 }

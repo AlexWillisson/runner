@@ -9,7 +9,6 @@ package
 		private var map1:FlxTilemap;
 		private var player:Player;
 		private var firstleg:Limb;
-		private var map2:FlxTilemap;
 		public var paused:Paused;
 		private var i:uint = 0;
 		private var j:uint = 0;
@@ -27,7 +26,6 @@ package
 			FlxG.framerate = 60;
 			FlxG.flashFramerate = 60;
 			
-			//background = new FlxSprite(0, 0, Sources.ImgBackground); //CREATE BACKGROUND
 			background = new FlxBackdrop(Sources.ImgBackground, 0.8, 0.6, true, true); //endless background
 			add(background); //ADDING BACKGROUND TO THE STAGE AND MAKING IT VISIBLE
 			
@@ -38,11 +36,6 @@ package
 			map1.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16); //LOADING MAP
 			add(map1); //ADDING MAP TO THE STAGE AND MAKING IT VISIBLE
 			map1.x = 0
-			
-			map2 = new FlxTilemap();
-			map2.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16);
-			add(map2);
-			map2.x = 12
 			
 			player = new Player(Sources.Torso); //CREATING PLAYER
 			player.x = 35;
@@ -64,9 +57,6 @@ package
 		{
 			if (!paused.showing)
 			{
-				//FlxG.camera.scroll.x += 1;
-				// player.x += 1;
-				
 				if (player.x > 304) {
 					player.x -= 300;
 					map1.setTile(5, 13, i % 2);
@@ -77,11 +67,8 @@ package
 					j = (j + 1) % 3;
 				}
 				
-				FlxG.collide(player, map1); //MAKE BOTH COLLIDE
-				FlxG.collide(player, map2);
-
-				FlxG.collide(firstleg, map1); //MAKE BOTH COLLIDE
-				FlxG.collide(firstleg, map2);
+				FlxG.collide(player, map1);
+				FlxG.collide(firstleg, map1);
 
 				if (FlxG.collide(player, firstleg)) {
 					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);
@@ -91,7 +78,6 @@ package
 				}
 
 				super.update()
-			//Access the end screen by pressing comma
 				if (FlxG.keys.COMMA)
 				{
 					FlxG.switchState(new EndScreen());
