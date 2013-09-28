@@ -5,7 +5,11 @@ package
 	public class Player extends FlxSprite
 	{
 		public var leg1:Boolean;
-		
+		public var camTar:FlxObject;		
+
+		private var offX = 110;
+		private var camY = 120;
+
 		public function Player(sprite: Class):void
 		{
 			loadGraphic(sprite, true, true, 14, 15);
@@ -16,6 +20,11 @@ package
 			acceleration.y = 300; //ADDING GRAVITY
 
 			leg1 = false;
+
+			camTar = new FlxObject;
+
+			camTar.x = x + offX;
+			camTar.y = camY;
 		}
 		
 		override public function update():void
@@ -25,6 +34,9 @@ package
 
 			movement();
 				
+			camTar.x = x + offX;
+			camTar.y = camY;
+
 			super.update();
 		}
 

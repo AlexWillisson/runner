@@ -36,14 +36,15 @@ package
 			add(map1); //ADDING MAP TO THE STAGE AND MAKING IT VISIBLE
 			map1.x = 0
 			
-			for (var i = 0; i < 20; i++) {
-				map1.setTile (i, 14, 2);
+			for (var i = 0; i < 40; i++) {
+				map1.setTile (i, 14, 1);
 			}
 
 			player = new Player(Sources.Torso); //CREATING PLAYER
 			player.x = FlxG.width / 3;
 			player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
+			FlxG.camera.follow(player.camTar)
 			
 			firstleg = new Limb(Sources.Leg);
 			firstleg.x = FlxG.width - 100;
@@ -59,10 +60,10 @@ package
 		{
 			if (!paused.showing)
 			{
-				// FlxG.camera.scroll.x += 1;
+				FlxG.camera.scroll.x += 1;
 
-				if (player.x > 310) {
-					player.x -= 300;
+				if (player.x > 320) {
+					player.x = 0;
 				}
 
 				FlxG.collide(player, map1);
@@ -75,6 +76,7 @@ package
 					remove(firstleg);
 				}
 
+				// FlxG.camera.x = player.x
 				super.update()
 				//Access the end screen by pressing comma
 				if (FlxG.keys.COMMA)
