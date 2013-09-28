@@ -9,7 +9,8 @@ package
 		private var map1:FlxTilemap;
 		private var player:Player;
 		private var firstleg:Limb;
-		public var paused:FlxPaused;
+		private var tileX;
+		public var paused:Paused;
 		public var allowHills:Boolean;
 		
 		public function PlayState():void
@@ -24,7 +25,6 @@ package
 			FlxG.framerate = 60;
 			FlxG.flashFramerate = 60;
 			
-			//background = new FlxSprite(0, 0, Sources.ImgBackground); //CREATE BACKGROUND
 			background = new FlxBackdrop(Sources.ImgBackground, 0.8, 0.6, true, true); //endless background
 			add(background); //ADDING BACKGROUND TO THE STAGE AND MAKING IT VISIBLE
 			
@@ -36,22 +36,24 @@ package
 			add(map1); //ADDING MAP TO THE STAGE AND MAKING IT VISIBLE
 			map1.x = 0
 			
-			for (var i = 0; i < 40; i++) {
-				map1.setTile (i, 14, 1);
+			for (var idx = 0; idx < 20; idx++) {
+				map1.setTile (idx, 14, 1);
 			}
 
+			tileX = 5;
+
 			player = new Player(Sources.Torso); //CREATING PLAYER
-			player.x = FlxG.width / 3;
+			player.x = 35;
 			player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
 			FlxG.camera.follow(player.camTar)
 			
 			firstleg = new Limb(Sources.Leg);
-			firstleg.x = FlxG.width - 100;
+			firstleg.x = FlxG.width - 50;
 			firstleg.y = FlxG.height - 31;
 			add(firstleg);
 
-			paused = new FlxPaused;	//adding pause functionality
+			paused = new Paused;	//adding pause functionality
 			super.create();
 
 		}
@@ -60,11 +62,27 @@ package
 		{
 			if (!paused.showing)
 			{
-				FlxG.camera.scroll.x += 1;
+				// FlxG.camera.scroll.x += 1;
 
 				if (player.x > 320) {
 					player.x = 0;
+
+					map1.setTile(tileX, 13, 0);
+
+					tileX++;
+					map1.setTile(tileX, 13, 2);
+
 				}
+
+				// if (player.x > 304) {
+				// 	player.x -= 300;
+				// 	map1.setTile(5, 13, i % 2);
+				// 	map1.setTile(5, 12, i / 3);
+				// 	i = (i + 1) % 4;
+				// 	map1.setTile(13, 13, j / 2);
+				// 	map1.setTile(14, 12, i%2);
+				// 	j = (j + 1) % 3;
+				// }
 
 				FlxG.collide(player, map1);
 				FlxG.collide(firstleg, map1);
@@ -78,14 +96,14 @@ package
 
 				// FlxG.camera.x = player.x
 				super.update()
-				//Access the end screen by pressing comma
+
 				if (FlxG.keys.COMMA)
 				{
 					FlxG.switchState(new EndScreen());
 				}
 				if (FlxG.keys.P)
 				{
-					paused = new FlxPaused;
+					paused = new Paused;			
 					paused.showPaused();
 					add(paused);
 				}

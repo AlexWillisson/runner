@@ -15,7 +15,7 @@ package
 			loadGraphic(sprite, true, true, 14, 15);
 			//SETTING ANIMATIONS
 			addAnimation("idle"/*name of animation*/, [0]/*used frames*/);
-			addAnimation("walk", [0, 1, 2, 1], 5/*frames per second*/);
+			addAnimation("walk", [0, 1, 2, 1], 12/*frames per second*/);
 			addAnimation("jump", [3]);
 			acceleration.y = 300; //ADDING GRAVITY
 
@@ -29,9 +29,15 @@ package
 		
 		override public function update():void
 		{
-			velocity.x = 62.5; //SET SPEED
+			velocity.x = 100; //SET SPEED
 			facing = RIGHT; //CHANGE FACING
-
+			
+			//death conditions for left, right, and bottom of screen
+			if ((x < 0) || (y > FlxG.height))
+			{
+				FlxG.switchState(new MenuState());
+			}
+			
 			movement();
 				
 			camTar.x = x + offX;
