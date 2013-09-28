@@ -8,7 +8,7 @@ package
 		public var camTar:FlxObject;		
 
 		private var offX = 110;
-		private var camY = 120;
+		private var camY = 103;
 		private var oldX = -1;
 
 		public function Player(sprite: Class):void

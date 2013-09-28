@@ -37,14 +37,14 @@ package
 			map1.x = 0
 			
 			for (var idx = 0; idx < 20; idx++) {
-				map1.setTile (idx, 14, 1);
+				map1.setTile (idx, 13, 1);
 			}
 
 			tileX = 5;
 
 			player = new Player(Sources.Torso); //CREATING PLAYER
 			player.x = 35;
-			player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
+			player.y = FlxG.height - 47; //SETTING POSITION OF THE PLAYER
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
 			FlxG.camera.follow(player.camTar)
 			
@@ -67,10 +67,10 @@ package
 				if (player.x > 320) {
 					player.x = 0;
 
-					map1.setTile(tileX, 13, 0);
+					map1.setTile(tileX, 12, 0);
 
 					tileX++;
-					map1.setTile(tileX, 13, 2);
+					map1.setTile(tileX, 12, 2);
 
 				}
 
