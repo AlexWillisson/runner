@@ -9,6 +9,7 @@ package
 
 		private var offX = 110;
 		private var camY = 120;
+		private var oldX = -1;
 
 		public function Player(sprite: Class):void
 		{
@@ -33,17 +34,22 @@ package
 			facing = RIGHT; //CHANGE FACING
 			
 			//death conditions for left, right, and bottom of screen
-			if ((x < 0) || (y > FlxG.height))
+			if ((oldX == x) || (x < 0) || (y > FlxG.height))
 			{
 				FlxG.switchState(new MenuState());
 			}
 			
+			if (oldX == -1)
+				oldX = x;
+
 			movement();
 				
 			camTar.x = x + offX;
 			camTar.y = camY;
 
 			super.update();
+
+			oldX = x;
 		}
 
 		private function movement():void
