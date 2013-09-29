@@ -56,6 +56,12 @@ package
 			map2.setTile(21, groundIdx, 2);
 			map2.setTile(4, groundIdx, 2);
 
+			map1.setTile(36, groundIdx, 2);
+			map2.setTile(36, groundIdx, 2);
+
+			map1.setTile(19, groundIdx, 2);
+			map2.setTile(19, groundIdx, 2);
+
 			// map2.setTile(10, groundIdx, 0);
 			// map2.setTile(11, groundIdx, 0);
 
@@ -85,7 +91,7 @@ package
 		{
 			if (!paused.showing)
 			{
-				if (player.x > 320) {
+				if (player.x > 640) {
 					player.x = startX;
 
 					if (current == map1) {

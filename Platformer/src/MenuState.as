@@ -7,14 +7,14 @@ package
 		override public function create(): void
 		{
 			var t: FlxText;
-			t = new FlxText(0, FlxG.height/2-20, FlxG.width, "Body Runner");
+			t = new FlxText(20, FlxG.height/2-40, FlxG.width, "Body Runner");
 			t.size = 32;
-			t.alignment = "center";
+			t.alignment = "left";
 			add(t);
-			t = new FlxText(FlxG.width/2-100, FlxG.height-30, 200, "click to start")
+			t = new FlxText(40, FlxG.height/2, 200, "click to start")
 
 			t.size = 16;
-			t.alignment = "center";
+			t.alignment = "left";
 			add(t);
 
 			FlxG.mouse.show();

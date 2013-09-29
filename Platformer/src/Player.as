@@ -7,9 +7,9 @@ package
 		public var leg1:Boolean;
 		public var camTar:FlxObject;		
 
-		private var offX:uint = 110;
-		// private var camY:uint = 103;
-		private var camY:uint = 120;
+		// private var offX:int = 110;
+		private var offX:int = 260;
+		private var camY:int = 120;
 		private var oldX:int = -1;
 
 		public function Player(sprite: Class):void
