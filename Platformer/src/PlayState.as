@@ -7,9 +7,13 @@ package
 		//private var background:FlxSprite;
 		private var background:FlxBackdrop
 		private var map1:FlxTilemap;
+		private var map2:FlxTilemap;
+		private var current:FlxTilemap;
 		private var player:Player;
 		private var firstleg:Limb;
-		private var tileX;
+		private var tileX:int;
+		private var startX:int;
+		private var groundIdx:int = 14;
 		public var paused:Paused;
 		public var allowHills:Boolean;
 		
@@ -34,17 +38,32 @@ package
 			//map.auto = FlxTilemap.AUTO;
 			map1.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16); //LOADING MAP
 			add(map1); //ADDING MAP TO THE STAGE AND MAKING IT VISIBLE
-			map1.x = 0
 			
-			for (var idx = 0; idx < 20; idx++) {
-				map1.setTile (idx, 13, 1);
+			map2 = new FlxTilemap();
+			map2.loadMap(new Sources.TxtMap2, Sources.ImgMap, 16, 16);
+
+			var idx:int;
+
+			for (idx = 0; idx < 40; idx++) {
+				map1.setTile (idx, groundIdx, 1);
 			}
 
+			for (idx = 0; idx < 40; idx++) {
+				map2.setTile (idx, groundIdx, 1);
+			}
+
+			map2.setTile (10, groundIdx, 0);
+			map2.setTile (11, groundIdx, 0);
+
 			tileX = 5;
+			current = map1;
+
+			startX = 50;
 
 			player = new Player(Sources.Torso); //CREATING PLAYER
-			player.x = 35;
-			player.y = FlxG.height - 47; //SETTING POSITION OF THE PLAYER
+			player.x = startX;
+			// player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
+			player.y = FlxG.height - 15;
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
 			FlxG.camera.follow(player.camTar)
 			
@@ -62,30 +81,22 @@ package
 		{
 			if (!paused.showing)
 			{
-				// FlxG.camera.scroll.x += 1;
-
 				if (player.x > 320) {
-					player.x = 0;
+					player.x = startX;
 
-					map1.setTile(tileX, 12, 0);
+					if (current == map1) {
+						remove(map1);
+						add(map2);
+						current = map2
+					}
 
+					current.setTile(tileX, groundIdx - 1, 0);
 					tileX++;
-					map1.setTile(tileX, 12, 2);
-
+					current.setTile(tileX, groundIdx - 1, 2);
 				}
 
-				// if (player.x > 304) {
-				// 	player.x -= 300;
-				// 	map1.setTile(5, 13, i % 2);
-				// 	map1.setTile(5, 12, i / 3);
-				// 	i = (i + 1) % 4;
-				// 	map1.setTile(13, 13, j / 2);
-				// 	map1.setTile(14, 12, i%2);
-				// 	j = (j + 1) % 3;
-				// }
-
-				FlxG.collide(player, map1);
-				FlxG.collide(firstleg, map1);
+				FlxG.collide(player, current);
+				FlxG.collide(firstleg, current);
 
 				if (FlxG.collide(player, firstleg)) {
 					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);

@@ -11,5 +11,6 @@ package
 		[Embed(source = 'legplaceholder.png')] public static var Leg:Class;
 
 		[Embed(source = 'map.txt', mimeType = "application/octet-stream")] public static var TxtMap:Class;
+		[Embed(source = 'map2.txt', mimeType = "application/octet-stream")] public static var TxtMap2:Class;
 	}
 }

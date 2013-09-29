@@ -7,9 +7,10 @@ package
 		public var leg1:Boolean;
 		public var camTar:FlxObject;		
 
-		private var offX = 110;
-		private var camY = 103;
-		private var oldX = -1;
+		private var offX:uint = 110;
+		// private var camY:uint = 103;
+		private var camY:uint = 120;
+		private var oldX:int = -1;
 
 		public function Player(sprite: Class):void
 		{
@@ -18,7 +19,7 @@ package
 			addAnimation("idle"/*name of animation*/, [0]/*used frames*/);
 			addAnimation("walk", [0, 1, 2, 1], 12/*frames per second*/);
 			addAnimation("jump", [3]);
-			acceleration.y = 300; //ADDING GRAVITY
+			acceleration.y = 600; //ADDING GRAVITY
 
 			leg1 = false;
 
@@ -34,8 +35,7 @@ package
 			facing = RIGHT; //CHANGE FACING
 			
 			//death conditions for left, right, and bottom of screen
-			if ((oldX == x) || (x < 0) || (y > FlxG.height))
-			{
+			if ((oldX == x) || (x < 0) || (y > FlxG.height)) {
 				FlxG.switchState(new MenuState());
 			}
 			
@@ -56,7 +56,7 @@ package
 		{
 			if (touching & DOWN) {
 				if (leg1 && (FlxG.keys.UP || FlxG.keys.W)) {
-					velocity.y = -150;
+					velocity.y = -200;
 				} else {
 					play("walk");
 				}
