@@ -52,8 +52,12 @@ package
 				map2.setTile (idx, groundIdx, 1);
 			}
 
-			map2.setTile (10, groundIdx, 0);
-			map2.setTile (11, groundIdx, 0);
+			map1.setTile(21, groundIdx, 2);
+			map2.setTile(21, groundIdx, 2);
+			map2.setTile(4, groundIdx, 2);
+
+			// map2.setTile(10, groundIdx, 0);
+			// map2.setTile(11, groundIdx, 0);
 
 			tileX = 5;
 			current = map1;
@@ -92,7 +96,7 @@ package
 
 					current.setTile(tileX, groundIdx - 1, 0);
 					tileX++;
-					current.setTile(tileX, groundIdx - 1, 2);
+					// current.setTile(tileX, groundIdx - 1, 2);
 				}
 
 				FlxG.collide(player, current);

@@ -1,6 +1,7 @@
 package
 {
 	import org.flixel.*;
+
 	[SWF(width="640", height="480", backgroundColor="#000000")]
 	[Frame(factoryClass="Preloader")]
 	
@@ -9,6 +10,7 @@ package
 		public function Main():void
 		{
 			super(320, 240, MenuState, 2);
+			// super(1280, 240, MenuState, 2);
 		}
 	}
 }
