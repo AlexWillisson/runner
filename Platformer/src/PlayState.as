@@ -91,20 +91,20 @@ package
 			secondLeg.y = FlxG.height - 31;
 			add(secondLeg);
 
-			// firstArm = new Limb(Sources.Arm);
-			// firstArm.x = FlxG.width - 80;
-			// firstArm.y = FlxG.height - 31;
-			// add(firstArm);
+			firstArm = new Limb(Sources.Arm);
+			firstArm.x = FlxG.width - 80;
+			firstArm.y = FlxG.height - 31;
+			add(firstArm);
 
-			// secondArm = new Limb(Sources.Arm);
-			// secondArm.x = FlxG.width - 60;
-			// secondArm.y = FlxG.height - 31;
-			// add(secondArm);
+			secondArm = new Limb(Sources.Arm);
+			secondArm.x = FlxG.width - 60;
+			secondArm.y = FlxG.height - 31;
+			add(secondArm);
 
-			// head = new Limb(Sources.Head);
-			// head.x = FlxG.width - 40;
-			// head.y = FlxG.height - 31;
-			// add(head);
+			head = new Limb(Sources.Head);
+			head.x = FlxG.width - 40;
+			head.y = FlxG.height - 31;
+			add(head);
 
 			paused = new Paused;	//adding pause functionality
 			super.create();
@@ -149,23 +149,23 @@ package
 					remove(secondLeg);
 				}
 
-				// if (FlxG.collide(player, firstArm)) {
-				// 	player.loadGraphic(Sources.OneArm, true, true, 14, 15);
-				// 	player.arm1 = true;
-				// 	remove(firstArm);
-				// }
+				if (FlxG.collide(player, firstArm)) {
+					player.loadGraphic(Sources.OneArm, true, true, 14, 15);
+					player.arm1 = true;
+					remove(firstArm);
+				}
 
-				// if (FlxG.collide(player, secondArm)) {
-				// 	player.loadGraphic(Sources.TwoArms, true, true, 14, 15);
-				// 	player.arm2 = true;
-				// 	remove(secondArm);
-				// }
+				if (FlxG.collide(player, secondArm)) {
+					player.loadGraphic(Sources.TwoArms, true, true, 14, 15);
+					player.arm2 = true;
+					remove(secondArm);
+				}
 
-				// if (FlxG.collide(player, head)) {
-				// 	player.loadGraphic(Sources.FullPlayer, true, true, 14, 15);
-				// 	player.head = true;
-				// 	remove(head);
-				// }
+				if (FlxG.collide(player, head)) {
+					player.loadGraphic(Sources.FullPlayer, true, true, 14, 15);
+					player.head = true;
+					remove(head);
+				}
 
 				// FlxG.camera.x = player.x
 				super.update()
