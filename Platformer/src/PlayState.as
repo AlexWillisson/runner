@@ -44,7 +44,7 @@ package
 			player = new Player(Sources.Torso); //CREATING PLAYER
 			player.x = startX;
 			// player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
-			player.y = FlxG.height - 15;
+			player.y = FlxG.height - 50;
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
 			FlxG.camera.follow(player.camTar)
 			
@@ -93,8 +93,8 @@ package
 				FlxG.timer = timerNum;
 				timerText.text = "" + FlxU.floor(timerNum);
 				
-				if (player.x > 640) {
-					player.x = startX;
+				//if (player.x > 640)
+					//player.x = startX;
 
 				FlxG.collide(player, platform2);
 				FlxG.collide(player, platform1);
@@ -118,7 +118,7 @@ package
 					queuePlatforms.push(temp);
 					
 				}
-				
+				super.update()
 				//death screen 
 				if (FlxG.keys.COMMA)
 				{
@@ -132,7 +132,7 @@ package
 					paused.showPaused();
 					add(paused);
 				}
-				super.update()
+				
 				
 			} else
 			{
