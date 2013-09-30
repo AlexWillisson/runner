@@ -23,6 +23,7 @@ package
 		private var gapWidth:int = 30;
 		private var jumpHeight:int = 20;
 		
+		public var arms:Number;
 		public var timerNum:Number = 0;
 		public var timerText:FlxText;
 		public function PlayState():void
@@ -52,29 +53,11 @@ package
 			FlxG.camera.follow(player.camTar)
 			
 			firstLeg = new Limb(Sources.Leg);
-			firstLeg.x = 90;
+			firstLeg.x = 240;
 			firstLeg.y = FlxG.height - 31;
 			add(firstLeg);
 
-			secondLeg = new Limb(Sources.Leg);
-			secondLeg.x = 110;
-			secondLeg.y = FlxG.height - 31;
-			add(secondLeg);
-
-			firstArm = new Limb(Sources.Arm);
-			firstArm.x = 130
-			firstArm.y = FlxG.height - 31;
-			add(firstArm);
-
-			secondArm = new Limb(Sources.Arm);
-			secondArm.x = 150;
-			secondArm.y = FlxG.height - 31;
-			add(secondArm);
-
-			head = new Limb(Sources.Head);
-			head.x = 170;
-			head.y = FlxG.height - 31;
-			add(head);
+			
 
 			timerText = new FlxText(0, 0, 100, " ");
 			timerText.size = 16;
@@ -107,6 +90,28 @@ package
 			
 			if (!paused.showing)
 			{
+				if (FlxG.worldBounds.width == 800) {
+					secondLeg = new Limb(Sources.Leg);
+					secondLeg.x = 1000;
+					secondLeg.y = 0;
+					add(secondLeg);
+				} else if (FlxG.worldBounds.width == 1400) {
+					arms = 1700;
+					firstArm = new Limb(Sources.Arm);
+					firstArm.x = arms;
+					firstArm.y = 0;
+					add(firstArm);
+					secondArm = new Limb(Sources.Arm);
+					secondArm.x = arms;
+					secondArm.y = 0;
+					add(secondArm);
+				} else if (FlxG.worldBounds.width == 2000) {
+					head = new Limb(Sources.Head);
+					head.x = 2400;
+					head.y = 0;
+					add(head);
+				}
+				
 				FlxG.worldBounds.x += 1; 
 				FlxG.worldBounds.width += 1;
 				background.draw();
@@ -178,6 +183,10 @@ package
 				//death screen 
 				if (FlxG.keys.COMMA)
 				{
+<<<<<<< HEAD
+=======
+					//FlxG.music.stop();
+>>>>>>> 098eddce0442f41ad90b1d6dd23368013c65f81e
 					FlxG.switchState(new EndScreen());
 				}
 				
