@@ -66,12 +66,12 @@ package
 					velocity.y = jumpHeight;
 					justJumped = true;
 					play("jump");
-					FlxG.play(Sources.JumpSoundEffect);
+					FlxG.play(Sources.JumpSoundEffect,0.25);
 				} else if (leg2 && !doubleJumped) {
 					velocity.y += jumpHeight;
 					justJumped = true;
 					doubleJumped = true;
-					FlxG.play(Sources.JumpSoundEffect);
+					FlxG.play(Sources.JumpSoundEffect,0.25);
 				}
 			} else if (touching & DOWN) {
 				doubleJumped = false;
