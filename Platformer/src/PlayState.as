@@ -1,13 +1,10 @@
 package
 {
+	import flash.automation.ActionGenerator;
 	import org.flixel.*;
 	public class PlayState extends FlxState
 	{
-		//private var background:FlxSprite;
 		private var background:FlxBackdrop
-		private var map1:FlxTilemap;
-		private var map2:FlxTilemap;
-		private var current:FlxTilemap;
 		private var player:Player;
 		private var firstLeg:Limb;
 		private var secondLeg:Limb;
@@ -19,6 +16,13 @@ package
 		private var groundIdx:int = 14;
 		public var paused:Paused;
 		public var allowHills:Boolean;
+		public var queuePlatforms:Array; 
+		public var platform1:FlxSprite;
+		public var platform2:FlxSprite;
+		public var currentPlatform:FlxSprite;
+		private var gapWidth:int = 30;
+		private var jumpHeight:int = 20;
+		
 		public var timerNum:Number = 0;
 		public var timerText:FlxText;
 		public function PlayState():void
@@ -36,48 +40,12 @@ package
 			background = new FlxBackdrop(Sources.ImgBackground, -0.54, 0, true, false); //endless background
 			add(background); //ADDING BACKGROUND TO THE STAGE AND MAKING IT VISIBLE
 			
-			allowHills = false;
-
-			map1 = new FlxTilemap(); //CREATING MAP
-			//map.auto = FlxTilemap.AUTO;
-			map1.loadMap(new Sources.TxtMap, Sources.ImgMap, 16, 16); //LOADING MAP
-			add(map1); //ADDING MAP TO THE STAGE AND MAKING IT VISIBLE
-			
-			map2 = new FlxTilemap();
-			map2.loadMap(new Sources.TxtMap2, Sources.ImgMap, 16, 16);
-
-			var idx:int;
-
-			for (idx = 0; idx < 40; idx++) {
-				map1.setTile (idx, groundIdx, (idx % 4) + 1);
-			}
-
-			for (idx = 0; idx < 40; idx++) {
-				map2.setTile (idx, groundIdx, (idx % 4) + 1);
-			}
-
-			map1.setTile(21, groundIdx, 5);
-			map2.setTile(21, groundIdx, 5);
-			map2.setTile(4, groundIdx, 5);
-
-			map1.setTile(36, groundIdx, 5);
-			map2.setTile(36, groundIdx, 5);
-
-			map1.setTile(19, groundIdx, 5);
-			map2.setTile(19, groundIdx, 5);
-
-			// map2.setTile(10, groundIdx, 0);
-			// map2.setTile(11, groundIdx, 0);
-
-			tileX = 5;
-			current = map1;
-
 			startX = 50;
 
 			player = new Player(Sources.Torso); //CREATING PLAYER
 			player.x = startX;
 			// player.y = FlxG.height - 31; //SETTING POSITION OF THE PLAYER
-			player.y = FlxG.height - 15;
+			player.y = FlxG.height - 50;
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
 			FlxG.camera.follow(player.camTar)
 			
@@ -113,6 +81,21 @@ package
 			timerText.scrollFactor.y = 0;
 			
 			paused = new Paused;	//adding pause functionality
+			
+			queuePlatforms = new Array();
+			platform1 = new FlxSprite(0, FlxG.height, Sources.Platform);
+			platform1.y = FlxG.height - platform1.height;
+			platform1.immovable = true;
+			add(platform1);
+			queuePlatforms.push(platform1); 
+			
+			platform2 = new FlxSprite(platform1.x + platform1.width + gapWidth, FlxG.height-jumpHeight, Sources.Platform);
+			platform2.immovable = true;
+			add(platform2);
+			queuePlatforms.push(platform2); 
+			
+			currentPlatform = platform1; 
+			
 			super.create();
 
 		}
@@ -122,31 +105,22 @@ package
 			
 			if (!paused.showing)
 			{
+				FlxG.worldBounds.x += 1; 
+				FlxG.worldBounds.width += 1;
 				background.draw();
 				timerNum += FlxG.elapsed;
 				FlxG.timer = timerNum;
 				timerText.text = "" + FlxU.floor(timerNum);
 				
-				if (player.x > 640) {
-					player.x = startX;
+				//if (player.x > 640)
+					//player.x = startX;
 
-					if (current == map1) {
-						remove(map1);
-						add(map2);
-						current = map2
-					}
-
-					current.setTile(tileX, groundIdx - 1, 0);
-					tileX++;
-					// current.setTile(tileX, groundIdx - 1, 5);
-				}
-
-				FlxG.collide(player, current);
-				FlxG.collide(firstLeg, current);
-				FlxG.collide(secondLeg, current);
-				FlxG.collide(firstArm, current);
-				FlxG.collide(secondArm, current);
-				FlxG.collide(head, current);
+				FlxG.collide(player, currentPlatform);
+				FlxG.collide(firstLeg, currentPlatform);
+				FlxG.collide(secondLeg, currentPlatform);
+				FlxG.collide(firstArm, currentPlatform);
+				FlxG.collide(secondArm, currentPlatform);
+				FlxG.collide(head, currentPlatform);
 
 				if (!player.leg1 && FlxG.collide(player, firstLeg)) {
 					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);
@@ -178,14 +152,31 @@ package
 					player.head = true;
 					remove(head);
 				}
-
-				// FlxG.camera.x = player.x
+				
+				if (!currentPlatform.onScreen()) 
+				{
+					currentPlatform = queuePlatforms[1]; 
+					
+					var temp:FlxSprite = queuePlatforms[0];
+					queuePlatforms.splice(0, 1);
+					temp.x = randomNum(1.5, currentPlatform.x + currentPlatform.width, gapWidth);
+					var randHeight:Number = randomNum(1.5, currentPlatform.y, jumpHeight);
+					while (randHeight > FlxG.height || randHeight < 0)
+					{
+						randHeight = randomNum(1.5, currentPlatform.y, jumpHeight);
+					}
+					temp.y = randHeight;
+					queuePlatforms.push(temp);
+					
+				}
 				super.update()
-
+				//death screen 
 				if (FlxG.keys.COMMA)
 				{
 					FlxG.switchState(new EndScreen());
 				}
+				
+				//pause screen 
 				if (FlxG.keys.P)
 				{
 					paused = new Paused;			
@@ -193,10 +184,25 @@ package
 					add(paused);
 				}
 				
+				
 			} else
 			{
 				paused.update();
 			}
+		}
+		
+		function randomNum(interval:Number, base:Number, multiplier:int):Number
+		{
+			var coinFlip:int; 
+			if (Math.random() > 0.8) 
+			{
+				coinFlip = 1; 
+			} else
+			{
+				coinFlip = -1; 
+			}
+			var rand:Number = Math.random() * interval;
+			return base + multiplier * rand * coinFlip ;
 		}
 	}
 }

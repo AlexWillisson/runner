@@ -10,6 +10,8 @@ package
 		
 		override public function create(): void
 		{
+			FlxG.worldBounds.x = 0; 
+			FlxG.worldBounds.width = 640;
 			var text: FlxText;
 			text = new FlxText(40, FlxG.height / 2 - 80, FlxG.width, "Game Over!");
 			text.size = 35;

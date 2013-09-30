@@ -16,6 +16,7 @@ package
 		private var camY:int = 120;
 		private var oldX:int = -1;
 		public var doubleJumped:Boolean = false;
+		private var jumpHeight:int = -200;
 
 		public function Player(sprite: Class):void
 		{
@@ -38,7 +39,7 @@ package
 			facing = RIGHT; //CHANGE FACING
 			
 			//death conditions for left, right, and bottom of screen
-			if ((oldX == x) || (x < 0) || (y > FlxG.height)) {
+			if ((FlxU.floor(oldX) == FlxU.floor(x)) || (x < 0) || (y > FlxG.height)) {
 				FlxG.switchState(new EndScreen());
 			}
 			
@@ -53,6 +54,7 @@ package
 			super.update();
 
 			oldX = x;
+			
 		}
 
 		private function movement():void
@@ -61,11 +63,11 @@ package
 
 			if (FlxG.keys.UP || FlxG.keys.W) {
 				if (leg1 && (touching & DOWN)) {
-					velocity.y = -200;
+					velocity.y = jumpHeight;
 					justJumped = true
 					play("jump");
 				} else if (leg2 && !doubleJumped && velocity.y > 0) {
-					velocity.y = -200;
+					velocity.y = jumpHeight;
 					justJumped = true
 					doubleJumped = true
 				}
