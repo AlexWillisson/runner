@@ -64,22 +64,17 @@ package
 			if (FlxG.keys.justPressed("UP") || FlxG.keys.justPressed("W")) {
 				if (leg1 && (touching & DOWN)) {
 					velocity.y = jumpHeight;
-					justJumped = true
+					justJumped = true;
 					play("jump");
-<<<<<<< HEAD
 					FlxG.play(Sources.JumpSoundEffect);
-				} else if (leg2 && !doubleJumped && velocity.y > 0) {
-					velocity.y = jumpHeight;
-=======
 				} else if (leg2 && !doubleJumped) {
 					velocity.y += jumpHeight;
->>>>>>> de7284cc5650af659cabda83d98667ae07e47a92
-					justJumped = true
-					doubleJumped = true
+					justJumped = true;
+					doubleJumped = true;
 					FlxG.play(Sources.JumpSoundEffect);
 				}
 			} else if (touching & DOWN) {
-				doubleJumped = false
+				doubleJumped = false;
 				play("walk");
 			}
 		}
