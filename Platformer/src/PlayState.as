@@ -9,7 +9,11 @@ package
 		private var map2:FlxTilemap;
 		private var current:FlxTilemap;
 		private var player:Player;
-		private var firstleg:Limb;
+		private var firstLeg:Limb;
+		private var secondLeg:Limb;
+		private var firstArm:Limb;
+		private var secondArm:Limb;
+		private var head:Limb;
 		private var tileX:int;
 		private var startX:int;
 		private var groundIdx:int = 14;
@@ -45,22 +49,22 @@ package
 			var idx:int;
 
 			for (idx = 0; idx < 40; idx++) {
-				map1.setTile (idx, groundIdx, 1);
+				map1.setTile (idx, groundIdx, (idx % 4) + 1);
 			}
 
 			for (idx = 0; idx < 40; idx++) {
-				map2.setTile (idx, groundIdx, 1);
+				map2.setTile (idx, groundIdx, (idx % 4) + 1);
 			}
 
-			map1.setTile(21, groundIdx, 2);
-			map2.setTile(21, groundIdx, 2);
-			map2.setTile(4, groundIdx, 2);
+			map1.setTile(21, groundIdx, 5);
+			map2.setTile(21, groundIdx, 5);
+			map2.setTile(4, groundIdx, 5);
 
-			map1.setTile(36, groundIdx, 2);
-			map2.setTile(36, groundIdx, 2);
+			map1.setTile(36, groundIdx, 5);
+			map2.setTile(36, groundIdx, 5);
 
-			map1.setTile(19, groundIdx, 2);
-			map2.setTile(19, groundIdx, 2);
+			map1.setTile(19, groundIdx, 5);
+			map2.setTile(19, groundIdx, 5);
 
 			// map2.setTile(10, groundIdx, 0);
 			// map2.setTile(11, groundIdx, 0);
@@ -77,10 +81,30 @@ package
 			add(player); //ADDING PLAYER TO THE STAGE AND MAKING HIM VISIBLE
 			FlxG.camera.follow(player.camTar)
 			
-			firstleg = new Limb(Sources.Leg);
-			firstleg.x = FlxG.width - 50;
-			firstleg.y = FlxG.height - 31;
-			add(firstleg);
+			firstLeg = new Limb(Sources.Leg);
+			firstLeg.x = 70;
+			firstLeg.y = FlxG.height - 31;
+			add(firstLeg);
+
+			secondLeg = new Limb(Sources.Leg);
+			secondLeg.x = 90;
+			secondLeg.y = FlxG.height - 31;
+			add(secondLeg);
+
+			firstArm = new Limb(Sources.Arm);
+			firstArm.x = 110
+			firstArm.y = FlxG.height - 31;
+			add(firstArm);
+
+			secondArm = new Limb(Sources.Arm);
+			secondArm.x = 130;
+			secondArm.y = FlxG.height - 31;
+			add(secondArm);
+
+			head = new Limb(Sources.Head);
+			head.x = 150;
+			head.y = FlxG.height - 31;
+			add(head);
 
 			timerText = new FlxText(0, 0, 100, " ");
 			timerText.size = 16;
@@ -114,17 +138,45 @@ package
 
 					current.setTile(tileX, groundIdx - 1, 0);
 					tileX++;
-					// current.setTile(tileX, groundIdx - 1, 2);
+					// current.setTile(tileX, groundIdx - 1, 5);
 				}
 
 				FlxG.collide(player, current);
-				FlxG.collide(firstleg, current);
+				FlxG.collide(firstLeg, current);
+				FlxG.collide(secondLeg, current);
+				FlxG.collide(firstArm, current);
+				FlxG.collide(secondArm, current);
+				FlxG.collide(head, current);
 
-				if (FlxG.collide(player, firstleg)) {
+				if (!player.leg1 && FlxG.collide(player, firstLeg)) {
 					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);
 					player.leg1 = true;
 					allowHills = true;
-					remove(firstleg);
+					remove(firstLeg);
+				}
+
+				if (!player.leg2 && FlxG.collide(player, secondLeg)) {
+					player.loadGraphic(Sources.TwoLegs, true, true, 14, 15);
+					player.leg2 = true;
+					remove(secondLeg);
+				}
+
+				if (!player.arm1 && FlxG.collide(player, firstArm)) {
+					player.loadGraphic(Sources.OneArm, true, true, 14, 15);
+					player.arm1 = true;
+					remove(firstArm);
+				}
+
+				if (!player.arm2 && FlxG.collide(player, secondArm)) {
+					player.loadGraphic(Sources.TwoArms, true, true, 14, 15);
+					player.arm2 = true;
+					remove(secondArm);
+				}
+
+				if (!player.head && FlxG.collide(player, head)) {
+					player.loadGraphic(Sources.FullPlayer, true, true, 14, 15);
+					player.head = true;
+					remove(head);
 				}
 
 				// FlxG.camera.x = player.x

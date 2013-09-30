@@ -4,13 +4,18 @@ package
 	
 	public class Player extends FlxSprite
 	{
-		public var leg1:Boolean;
-		public var camTar:FlxObject;		
+		public var camTar:FlxObject;
+		public var leg1:Boolean = false;
+		public var leg2:Boolean = false;
+		public var arm1:Boolean = false;
+		public var arm2:Boolean = false;
+		public var head:Boolean = false;
 
 		// private var offX:int = 110;
 		private var offX:int = 260;
 		private var camY:int = 120;
 		private var oldX:int = -1;
+		public var doubleJumped:Boolean = false;
 
 		public function Player(sprite: Class):void
 		{
@@ -20,8 +25,6 @@ package
 			addAnimation("walk", [0, 1, 2, 1], 12/*frames per second*/);
 			addAnimation("jump", [3]);
 			acceleration.y = 600; //ADDING GRAVITY
-
-			leg1 = false;
 
 			camTar = new FlxObject;
 
@@ -54,14 +57,23 @@ package
 
 		private function movement():void
 		{
-			if (touching & DOWN) {
-				if (leg1 && (FlxG.keys.UP || FlxG.keys.W)) {
+			var justJumped:Boolean = false
+
+			if (FlxG.keys.UP || FlxG.keys.W) {
+				if (leg1 && (touching & DOWN)) {
 					velocity.y = -200;
-				} else {
-					play("walk");
+					justJumped = true
+					play("jump");
+				} else if (leg2 && !doubleJumped && velocity.y > 0) {
+					velocity.y = -200;
+					justJumped = true
+					doubleJumped = true
 				}
-			} else {
-				play("jump");
+			}
+
+			if ((touching & DOWN) && !justJumped) {
+				doubleJumped = false
+				play("walk");
 			}
 		}
 	}
