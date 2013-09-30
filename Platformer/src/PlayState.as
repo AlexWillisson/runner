@@ -83,6 +83,7 @@ package
 			add(firstleg);
 
 			timerText = new FlxText(0, 0, 100, " ");
+			timerText.size = 16;
 			add(timerText); 
 			timerText.scrollFactor.x = 0;
 			timerText.scrollFactor.y = 0;
