@@ -36,7 +36,7 @@ package
 			facing = RIGHT; //CHANGE FACING
 			
 			//death conditions for left, right, and bottom of screen
-			if ((oldX == x) || (x < 0) || (y > FlxG.height)) {
+			if ((FlxU.floor(oldX) == FlxU.floor(x)) || (x < 0) || (y > FlxG.height)) {
 				FlxG.switchState(new EndScreen());
 			}
 			
@@ -51,6 +51,7 @@ package
 			super.update();
 
 			oldX = x;
+			
 		}
 
 		private function movement():void
