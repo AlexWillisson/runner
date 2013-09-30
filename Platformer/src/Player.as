@@ -68,6 +68,9 @@ package
 					play("jump");
 					FlxG.play(Sources.JumpSoundEffect,0.25);
 				} else if (leg2 && !doubleJumped) {
+					if (velocity.y > 0) {
+						velocity.y = 0;
+					}
 					velocity.y += jumpHeight;
 					justJumped = true;
 					doubleJumped = true;
