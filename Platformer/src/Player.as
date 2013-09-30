@@ -4,8 +4,12 @@ package
 	
 	public class Player extends FlxSprite
 	{
-		public var leg1:Boolean;
-		public var camTar:FlxObject;		
+		public var camTar:FlxObject;
+		public var leg1:Boolean = false;
+		public var leg2:Boolean = false;
+		public var arm1:Boolean = false;
+		public var arm2:Boolean = false;
+		public var head:Boolean = false;
 
 		// private var offX:int = 110;
 		private var offX:int = 260;
@@ -20,8 +24,6 @@ package
 			addAnimation("walk", [0, 1, 2, 1], 12/*frames per second*/);
 			addAnimation("jump", [3]);
 			acceleration.y = 600; //ADDING GRAVITY
-
-			leg1 = false;
 
 			camTar = new FlxObject;
 
