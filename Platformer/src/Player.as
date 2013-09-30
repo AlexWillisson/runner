@@ -11,6 +11,7 @@ package
 		private var offX:int = 260;
 		private var camY:int = 120;
 		private var oldX:int = -1;
+		private var jumpHeight:int = -200;
 
 		public function Player(sprite: Class):void
 		{
@@ -56,7 +57,7 @@ package
 		{
 			if (touching & DOWN) {
 				if (leg1 && (FlxG.keys.UP || FlxG.keys.W)) {
-					velocity.y = -200;
+					velocity.y = jumpHeight;
 				} else {
 					play("walk");
 				}
