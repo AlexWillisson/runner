@@ -178,7 +178,6 @@ package
 				//death screen 
 				if (FlxG.keys.COMMA)
 				{
-					FlxG.music.stop();
 					FlxG.switchState(new EndScreen());
 				}
 				
