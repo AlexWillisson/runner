@@ -9,8 +9,8 @@ package
 	{
 		public function Main():void
 		{
-			// super(320, 240, MenuState, 2);
-			super(640, 240, MenuState, 2);
+			super(320, 240, MenuState, 2);
+			// super(640, 240, MenuState, 2);
 		}
 	}
 }
