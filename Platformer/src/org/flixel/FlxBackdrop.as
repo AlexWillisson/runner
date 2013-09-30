@@ -68,18 +68,18 @@ package org.flixel
 			// find x position
 			if (_repeatX)
 			{
-				_ppoint.x = (x + 0* _scrollX) % _scrollW;
+				_ppoint.x = (x + FlxG.camera.scroll.x * _scrollX) % _scrollW;
 				if (_ppoint.x > 0) _ppoint.x -= _scrollW;
 			}
-			else _ppoint.x = (x + 0 * _scrollX);
+			else _ppoint.x = (x + FlxG.camera.scroll.x * _scrollX);
 			
 			// find y position
 			if (_repeatY)
 			{
-				_ppoint.y = (y + 0 * _scrollY) % _scrollH;
+				_ppoint.y = (y + FlxG.camera.scroll.y * _scrollY) % _scrollH;
 				if (_ppoint.y > 0) _ppoint.y -= _scrollH;
 			}
-			else _ppoint.y = (y + 0 * _scrollY);
+			else _ppoint.y = (y + FlxG.camera.scroll.y * _scrollY);
 			
 			// draw to the screen
 			FlxG.camera.buffer.copyPixels(_data, _data.rect, _ppoint, null, null, true);

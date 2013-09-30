@@ -2,7 +2,6 @@ package
 {
 	import flash.automation.ActionGenerator;
 	import org.flixel.*;
-	
 	public class PlayState extends FlxState
 	{
 		private var background:FlxBackdrop
@@ -23,6 +22,8 @@ package
 		private var gapWidth:int = 30;
 		private var jumpHeight:int = 40;
 		
+		public var timerNum:Number = 0;
+		public var timerText:FlxText;
 		public function PlayState():void
 		{
 			
@@ -35,7 +36,7 @@ package
 			FlxG.framerate = 60;
 			FlxG.flashFramerate = 60;
 			
-			background = new FlxBackdrop(Sources.ImgBackground, 0.8, 0.6, true, true); //endless background
+			background = new FlxBackdrop(Sources.ImgBackground, -0.54, 0, true, false); //endless background
 			add(background); //ADDING BACKGROUND TO THE STAGE AND MAKING IT VISIBLE
 			
 			startX = 50;
@@ -52,6 +53,12 @@ package
 			firstleg.y = FlxG.height - 31;
 			add(firstleg);
 
+			timerText = new FlxText(0, 0, 100, " ");
+			timerText.size = 16;
+			add(timerText); 
+			timerText.scrollFactor.x = 0;
+			timerText.scrollFactor.y = 0;
+			
 			paused = new Paused;	//adding pause functionality
 			
 			queuePlatforms = new Array();
@@ -71,15 +78,23 @@ package
 			super.create();
 
 		}
-
+		
 		override public function update():void
 		{
+			
 			if (!paused.showing)
 			{
 				//if (player.x > FlxG.width) 
 				//{
 					//player.x = startX;
 				//}
+				background.draw();
+				timerNum += FlxG.elapsed;
+				FlxG.timer = timerNum;
+				timerText.text = "" + FlxU.floor(timerNum);
+				
+				if (player.x > 640) {
+					player.x = startX;
 
 				FlxG.collide(player, platform2);
 				FlxG.collide(player, platform1);
