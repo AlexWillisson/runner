@@ -21,5 +21,6 @@ package
 		[Embed(source = 'assets/map2.txt', mimeType = "application/octet-stream")] public static var TxtMap2:Class;
 		
 		[Embed(source = 'assets/jumpsound.mp3')] public static var JumpSoundEffect:Class;
+		[Embed(source="assets/backgroundmusic.mp3")] public static var BackgroundMusic:Class;
 	}
 }

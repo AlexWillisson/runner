@@ -33,6 +33,8 @@ package
 		override public function create():void
 		{
 			//STARTING THE GAME...
+			FlxG.play(Sources.BackgroundMusic,1,true);
+			
 			FlxG.flash(0);
 			FlxG.framerate = 60;
 			FlxG.flashFramerate = 60;
@@ -176,6 +178,7 @@ package
 				//death screen 
 				if (FlxG.keys.COMMA)
 				{
+					FlxG.music.stop();
 					FlxG.switchState(new EndScreen());
 				}
 				
