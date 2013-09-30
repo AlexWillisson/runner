@@ -98,14 +98,11 @@ package
 			
 			if (!paused.showing)
 			{
-<<<<<<< HEAD
 				background.draw();
-=======
 				timerNum += FlxG.elapsed;
 				FlxG.timer = timerNum;
 				timerText.text = "" + FlxU.floor(timerNum);
 				
->>>>>>> 82f35db838d6ff8931a3b68e2744e450d11e504e
 				if (player.x > 640) {
 					player.x = startX;
 
