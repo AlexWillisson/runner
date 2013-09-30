@@ -22,6 +22,7 @@ package
 		
 		[Embed(source = 'assets/jumpsound.mp3')] public static var JumpSoundEffect:Class;
 		[Embed(source = 'assets/deathsound.mp3')] public static var DeathSoundEffect:Class;
+		[Embed(source = 'assets/coinget.mp3')] public static var CoinSoundEffect:Class;
 		[Embed(source = 'assets/backgroundmusic.mp3')] public static var BackgroundMusic:Class; // credit to http://www.freesound.org/people/Timbre/sounds/151171/
 	}
 }
