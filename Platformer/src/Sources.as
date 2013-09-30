@@ -16,6 +16,8 @@ package
 		[Embed(source = 'assets/leg.png')] public static var Leg:Class;
 		[Embed(source = 'assets/arm.png')] public static var Arm:Class;
 		[Embed(source = 'assets/head.png')] public static var Head:Class;
+		
+		[Embed(source = 'assets/gem.png')] public static var Gem:Class;
 
 		[Embed(source = 'assets/map.txt', mimeType = "application/octet-stream")] public static var TxtMap:Class;
 		[Embed(source = 'assets/map2.txt', mimeType = "application/octet-stream")] public static var TxtMap2:Class;

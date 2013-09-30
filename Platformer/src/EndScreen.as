@@ -28,6 +28,11 @@ package
 			text.size = 15;
 			text.alignment = "left";
 			add(text);
+			
+			text = new FlxText(65, FlxG.height / 2 + 60, FlxG.width, "You collected " + String(PlayState.gemsCollected) + " gems!");
+			text.size = 15;
+			text.alignment = "left";
+			add(text);
 		}
 		override public function update():void
 		{

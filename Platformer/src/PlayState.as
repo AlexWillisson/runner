@@ -19,10 +19,14 @@ package
 		public var queuePlatforms:Array; 
 		public var platform1:FlxSprite;
 		public var platform2:FlxSprite;
+		public var gem:FlxSprite;
 		public var currentPlatform:FlxSprite;
 		private var gapWidth:int = 30;
 		private var jumpHeight:int = 20;
+		private var gapMultFactor:Number = 1.5;
+		private var gemRandom:Number = 0.0;
 		
+		static public var gemsCollected:int = 0; 
 		public var arms:Number;
 		public var timerNum:Number = 0;
 		public var timerText:FlxText;
@@ -80,6 +84,10 @@ package
 			queuePlatforms.push(platform2); 
 			
 			currentPlatform = platform1; 
+			
+			gem = new FlxSprite(0, 0, Sources.Gem);
+			add(gem);
+			gem.visible = false;
 			
 			super.create();
 
@@ -174,16 +182,39 @@ package
 					
 					var temp:FlxSprite = queuePlatforms[0];
 					queuePlatforms.splice(0, 1);
-					temp.x = randomNum(1.5, currentPlatform.x + currentPlatform.width, gapWidth);
-					var randHeight:Number = randomNum(1.5, currentPlatform.y, jumpHeight);
+					if (secondLeg)
+					{
+						gapMultFactor = 3.0;
+					}
+					temp.x = randomNum(gapMultFactor, currentPlatform.x + currentPlatform.width, gapWidth);
+					var randHeight:Number = randomNum(gapMultFactor, currentPlatform.y, jumpHeight);
 					while (randHeight > FlxG.height || randHeight < 0)
 					{
-						randHeight = randomNum(1.5, currentPlatform.y, jumpHeight);
+						randHeight = randomNum(gapMultFactor, currentPlatform.y, jumpHeight);
 					}
 					temp.y = randHeight;
 					queuePlatforms.push(temp);
 					
 				}
+				
+				if (player.arm2) 
+				{
+					gem.x = currentPlatform.x + currentPlatform.width / 2.0;
+					gem.y = currentPlatform.y - gem.height;
+					if (!gem.visible && !gem.onScreen()) 
+					{
+						gem.visible = true;
+					}
+					
+					if (FlxG.overlap(player, gem) && gem.visible)
+					{
+						gemsCollected += 1;
+						gem.visible = false;
+						FlxG.play(Sources.CoinSoundEffect,0.25);	
+					}
+				}
+				
+				
 				super.update()
 				//death screen 
 				if (FlxG.keys.COMMA)
