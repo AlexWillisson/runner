@@ -201,7 +201,7 @@ package
 				
 				if (player.arm2) 
 				{
-					gem.x = currentPlatform.x + currentPlatform.width / 2.0;
+					gem.x = currentPlatform.x + currentPlatform.width - gem.width - (gapMultFactor - 0.5) * gapWidth;
 					gem.y = currentPlatform.y - gem.height;
 					if (!gem.visible && !gem.onScreen()) 
 					{
