@@ -11,14 +11,14 @@ package
 		override public function create(): void
 		{
 			var text: FlxText;
-			text = new FlxText(0, FlxG.height / 2 - 40, FlxG.width, "Game Over!");
+			text = new FlxText(40, FlxG.height / 2 - 40, FlxG.width, "Game Over!");
 			text.size = 35;
-			text.alignment = "center";
+			text.alignment = "left";
 			add(text);
 				
-			text = new FlxText(0, FlxG.height / 2 + 30, FlxG.width, "Click to Restart");
+			text = new FlxText(60, FlxG.height / 2 + 30, FlxG.width, "Click to Restart");
 			text.size = 20;
-			text.alignment = "center";
+			text.alignment = "left";
 			add(text);
 		}
 		override public function update():void
