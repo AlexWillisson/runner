@@ -53,7 +53,7 @@ package
 			FlxG.camera.follow(player.camTar)
 			
 			firstLeg = new Limb(Sources.Leg);
-			firstLeg.x = 90;
+			firstLeg.x = 240;
 			firstLeg.y = FlxG.height - 31;
 			add(firstLeg);
 
@@ -92,11 +92,11 @@ package
 			{
 				if (FlxG.worldBounds.width == 800) {
 					secondLeg = new Limb(Sources.Leg);
-					secondLeg.x = 800;
+					secondLeg.x = 1000;
 					secondLeg.y = 0;
 					add(secondLeg);
 				} else if (FlxG.worldBounds.width == 1400) {
-					arms = 1600;
+					arms = 1700;
 					firstArm = new Limb(Sources.Arm);
 					firstArm.x = arms;
 					firstArm.y = 0;
@@ -183,7 +183,7 @@ package
 				//death screen 
 				if (FlxG.keys.COMMA)
 				{
-					FlxG.music.stop();
+					//FlxG.music.stop();
 					FlxG.switchState(new EndScreen());
 				}
 				
