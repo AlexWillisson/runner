@@ -11,8 +11,8 @@ package
 		public var arm2:Boolean = false;
 		public var head:Boolean = false;
 
-		// private var offX:int = 110;
-		private var offX:int = 260;
+		private var offX:int = 110;
+		// private var offX:int = 260;
 		private var camY:int = 120;
 		private var oldX:int = -1;
 		public var doubleJumped:Boolean = false;

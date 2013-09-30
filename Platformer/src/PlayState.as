@@ -90,7 +90,9 @@ package
 			gem.visible = false;
 			
 			super.create();
+			FlxG.worldBounds.width = 640;
 
+			super.create();
 		}
 		
 		override public function update():void
