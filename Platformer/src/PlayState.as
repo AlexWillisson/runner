@@ -112,15 +112,18 @@ package
 				FlxG.timer = timerNum;
 				timerText.text = "" + FlxU.floor(timerNum);
 				
-				//if (player.x > 640)
-					//player.x = startX;
-
-				FlxG.collide(player, currentPlatform);
-				FlxG.collide(firstLeg, currentPlatform);
-				FlxG.collide(secondLeg, currentPlatform);
-				FlxG.collide(firstArm, currentPlatform);
-				FlxG.collide(secondArm, currentPlatform);
-				FlxG.collide(head, currentPlatform);
+				FlxG.collide(player, platform1);
+				FlxG.collide(firstLeg, platform1);
+				FlxG.collide(secondLeg, platform1);
+				FlxG.collide(firstArm, platform1);
+				FlxG.collide(secondArm, platform1);
+				FlxG.collide(head, platform1);
+				FlxG.collide(player, platform2);
+				FlxG.collide(firstLeg, platform2);
+				FlxG.collide(secondLeg, platform2);
+				FlxG.collide(firstArm, platform2);
+				FlxG.collide(secondArm, platform2);
+				FlxG.collide(head, platform2);
 
 				if (!player.leg1 && FlxG.collide(player, firstLeg)) {
 					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);
