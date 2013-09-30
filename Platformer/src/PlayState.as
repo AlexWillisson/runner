@@ -19,8 +19,8 @@ package
 		public var platform1:FlxSprite;
 		public var platform2:FlxSprite;
 		public var currentPlatform:FlxSprite;
-		private var gapWidth:int = 20;
-		private var jumpHeight:int = 40;
+		private var gapWidth:int = 30;
+		private var jumpHeight:int = 20;
 		
 		public var timerNum:Number = 0;
 		public var timerText:FlxText;
@@ -111,8 +111,13 @@ package
 					
 					var temp:FlxSprite = queuePlatforms[0];
 					queuePlatforms.splice(0, 1);
-					temp.x = currentPlatform.x + currentPlatform.width + gapWidth * randomNum(1.5, currentPlatform.x, gapWidth, FlxG.width);
-					temp.y = currentPlatform.y - jumpHeight * randomNum(1.5, currentPlatform.y, jumpHeight, FlxG.height);
+					temp.x = randomNum(1.5, currentPlatform.x + currentPlatform.width, gapWidth);
+					var randHeight:Number = randomNum(1.5, currentPlatform.y, jumpHeight);
+					while (randHeight > FlxG.height || randHeight < 0)
+					{
+						randHeight = randomNum(1.5, currentPlatform.y, jumpHeight);
+					}
+					temp.y = randHeight;
 					queuePlatforms.push(temp);
 					
 				}
@@ -138,10 +143,10 @@ package
 			}
 		}
 		
-		function randomNum(interval:Number, base:Number, multiplier:int, limit:Number):Number
+		function randomNum(interval:Number, base:Number, multiplier:int):Number
 		{
 			var coinFlip:int; 
-			if (Math.random() > 0.5) 
+			if (Math.random() > 0.8) 
 			{
 				coinFlip = 1; 
 			} else
@@ -149,14 +154,7 @@ package
 				coinFlip = -1; 
 			}
 			var rand:Number = Math.random() * interval;
-			rand = rand * coinFlip;
-			
-			if (base + multiplier * rand > limit) 
-			{
-				//return randomNum(interval, base, multiplier, limit);
-			}
-			trace(rand);
-			return rand;
+			return base + multiplier * rand * coinFlip ;
 		}
 	}
 }
