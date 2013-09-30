@@ -16,7 +16,7 @@ package
 			text.alignment = "left";
 			add(text);
 				
-			text = new FlxText(60, FlxG.height / 2 + 30, FlxG.width, "Click to Restart");
+			text = new FlxText(30, FlxG.height / 2 + 30, FlxG.width, "Press Space to Restart");
 			text.size = 20;
 			text.alignment = "left";
 			add(text);
@@ -25,7 +25,7 @@ package
 		{
 			super.update();
 
-			if (FlxG.mouse.justPressed()) {
+			if (FlxG.keys.SPACE) {
 				FlxG.switchState(new MenuState());
 			}
 		}
