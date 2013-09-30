@@ -133,6 +133,7 @@ package
 				FlxG.collide(head, platform2);
 
 				if (!player.leg1 && FlxG.collide(player, firstLeg)) {
+					FlxG.play(Sources.CoinSoundEffect,1);
 					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);
 					player.leg1 = true;
 					allowHills = true;
@@ -140,24 +141,28 @@ package
 				}
 
 				if (!player.leg2 && FlxG.collide(player, secondLeg)) {
+					FlxG.play(Sources.CoinSoundEffect,1);
 					player.loadGraphic(Sources.TwoLegs, true, true, 14, 15);
 					player.leg2 = true;
 					remove(secondLeg);
 				}
 
 				if (!player.arm1 && FlxG.collide(player, firstArm)) {
+					FlxG.play(Sources.CoinSoundEffect,1);
 					player.loadGraphic(Sources.OneArm, true, true, 14, 15);
 					player.arm1 = true;
 					remove(firstArm);
 				}
 
 				if (!player.arm2 && FlxG.collide(player, secondArm)) {
+					FlxG.play(Sources.CoinSoundEffect,1);
 					player.loadGraphic(Sources.TwoArms, true, true, 14, 15);
 					player.arm2 = true;
 					remove(secondArm);
 				}
 
 				if (!player.head && FlxG.collide(player, head)) {
+					FlxG.play(Sources.CoinSoundEffect,1);
 					player.loadGraphic(Sources.FullPlayer, true, true, 14, 15);
 					player.head = true;
 					remove(head);
