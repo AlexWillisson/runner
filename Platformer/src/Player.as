@@ -36,7 +36,7 @@ package
 			
 			//death conditions for left, right, and bottom of screen
 			if ((oldX == x) || (x < 0) || (y > FlxG.height)) {
-				FlxG.switchState(new MenuState());
+				FlxG.switchState(new EndScreen());
 			}
 			
 			if (oldX == -1)
