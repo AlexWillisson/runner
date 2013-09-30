@@ -19,7 +19,7 @@ package
 		public var platform1:FlxSprite;
 		public var platform2:FlxSprite;
 		public var currentPlatform:FlxSprite;
-		private var gapWidth:int = 30;
+		private var gapWidth:int = 20;
 		private var jumpHeight:int = 40;
 		
 		public var timerNum:Number = 0;
@@ -84,10 +84,8 @@ package
 			
 			if (!paused.showing)
 			{
-				//if (player.x > FlxG.width) 
-				//{
-					//player.x = startX;
-				//}
+				FlxG.worldBounds.x += 1; 
+				FlxG.worldBounds.width += 1;
 				background.draw();
 				timerNum += FlxG.elapsed;
 				FlxG.timer = timerNum;
@@ -113,8 +111,8 @@ package
 					
 					var temp:FlxSprite = queuePlatforms[0];
 					queuePlatforms.splice(0, 1);
-					temp.x = currentPlatform.x + currentPlatform.width + gapWidth * Math.random()*2;
-					temp.y = currentPlatform.y - jumpHeight * Math.random()*2;
+					temp.x = currentPlatform.x + currentPlatform.width + gapWidth * randomNum(1.5, currentPlatform.x, gapWidth, FlxG.width);
+					temp.y = currentPlatform.y - jumpHeight * randomNum(1.5, currentPlatform.y, jumpHeight, FlxG.height);
 					queuePlatforms.push(temp);
 					
 				}
@@ -138,6 +136,27 @@ package
 			{
 				paused.update();
 			}
+		}
+		
+		function randomNum(interval:Number, base:Number, multiplier:int, limit:Number):Number
+		{
+			var coinFlip:int; 
+			if (Math.random() > 0.5) 
+			{
+				coinFlip = 1; 
+			} else
+			{
+				coinFlip = -1; 
+			}
+			var rand:Number = Math.random() * interval;
+			rand = rand * coinFlip;
+			
+			if (base + multiplier * rand > limit) 
+			{
+				//return randomNum(interval, base, multiplier, limit);
+			}
+			trace(rand);
+			return rand;
 		}
 	}
 }
