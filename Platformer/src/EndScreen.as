@@ -10,6 +10,7 @@ package
 		
 		override public function create(): void
 		{
+			FlxG.play(Sources.DeathSoundEffect,0.5);
 			FlxG.worldBounds.x = 0; 
 			FlxG.worldBounds.width = 640;
 			var text: FlxText;
