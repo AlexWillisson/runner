@@ -183,10 +183,6 @@ package
 				//death screen 
 				if (FlxG.keys.COMMA)
 				{
-<<<<<<< HEAD
-=======
-					//FlxG.music.stop();
->>>>>>> 098eddce0442f41ad90b1d6dd23368013c65f81e
 					FlxG.switchState(new EndScreen());
 				}
 				
