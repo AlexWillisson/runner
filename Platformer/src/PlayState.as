@@ -82,27 +82,27 @@ package
 			FlxG.camera.follow(player.camTar)
 			
 			firstLeg = new Limb(Sources.Leg);
-			firstLeg.x = FlxG.width - 120;
+			firstLeg.x = 70;
 			firstLeg.y = FlxG.height - 31;
 			add(firstLeg);
 
 			secondLeg = new Limb(Sources.Leg);
-			secondLeg.x = FlxG.width - 100;
+			secondLeg.x = 90;
 			secondLeg.y = FlxG.height - 31;
 			add(secondLeg);
 
 			firstArm = new Limb(Sources.Arm);
-			firstArm.x = FlxG.width - 80;
+			firstArm.x = 110
 			firstArm.y = FlxG.height - 31;
 			add(firstArm);
 
 			secondArm = new Limb(Sources.Arm);
-			secondArm.x = FlxG.width - 60;
+			secondArm.x = 130;
 			secondArm.y = FlxG.height - 31;
 			add(secondArm);
 
 			head = new Limb(Sources.Head);
-			head.x = FlxG.width - 40;
+			head.x = 150;
 			head.y = FlxG.height - 31;
 			add(head);
 
@@ -136,32 +136,32 @@ package
 				FlxG.collide(secondArm, current);
 				FlxG.collide(head, current);
 
-				if (FlxG.collide(player, firstLeg)) {
+				if (!player.leg1 && FlxG.collide(player, firstLeg)) {
 					player.loadGraphic(Sources.OneLeg, true, true, 14, 15);
 					player.leg1 = true;
 					allowHills = true;
 					remove(firstLeg);
 				}
 
-				if (FlxG.collide(player, secondLeg)) {
+				if (!player.leg2 && FlxG.collide(player, secondLeg)) {
 					player.loadGraphic(Sources.TwoLegs, true, true, 14, 15);
 					player.leg2 = true;
 					remove(secondLeg);
 				}
 
-				if (FlxG.collide(player, firstArm)) {
+				if (!player.arm1 && FlxG.collide(player, firstArm)) {
 					player.loadGraphic(Sources.OneArm, true, true, 14, 15);
 					player.arm1 = true;
 					remove(firstArm);
 				}
 
-				if (FlxG.collide(player, secondArm)) {
+				if (!player.arm2 && FlxG.collide(player, secondArm)) {
 					player.loadGraphic(Sources.TwoArms, true, true, 14, 15);
 					player.arm2 = true;
 					remove(secondArm);
 				}
 
-				if (FlxG.collide(player, head)) {
+				if (!player.head && FlxG.collide(player, head)) {
 					player.loadGraphic(Sources.FullPlayer, true, true, 14, 15);
 					player.head = true;
 					remove(head);
