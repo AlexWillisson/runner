@@ -29,7 +29,7 @@ package
 			FlxG.framerate = 60;
 			FlxG.flashFramerate = 60;
 			
-			background = new FlxBackdrop(Sources.ImgBackground, 0.8, 0.6, true, true); //endless background
+			background = new FlxBackdrop(Sources.ImgBackground, -0.54, 0, true, false); //endless background
 			add(background); //ADDING BACKGROUND TO THE STAGE AND MAKING IT VISIBLE
 			
 			allowHills = false;
@@ -91,6 +91,7 @@ package
 		{
 			if (!paused.showing)
 			{
+				background.draw();
 				if (player.x > 640) {
 					player.x = startX;
 
