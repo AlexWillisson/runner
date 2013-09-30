@@ -7,14 +7,14 @@ package
 		override public function create(): void
 		{
 			var t: FlxText;
-			t = new FlxText(0, FlxG.height/2-40, FlxG.width, "Body Runner");
+			t = new FlxText(40, FlxG.height/2-40, FlxG.width, "Body Runner");
 			t.size = 32;
-			t.alignment = "center";
+			t.alignment = "left";
 			add(t);
-			t = new FlxText(0, FlxG.height/2, FlxG.width, "click to start")
+			t = new FlxText(60, FlxG.height/2, FlxG.width, "Press space to start")
 
 			t.size = 16;
-			t.alignment = "center";
+			t.alignment = "left";
 			add(t);
 
 			FlxG.mouse.show();
@@ -24,7 +24,7 @@ package
 		{
 			super.update();
 
-			if (FlxG.mouse.justPressed()) {
+			if (FlxG.keys.SPACE) {
 				FlxG.switchState(new PlayState());
 			}
 		}

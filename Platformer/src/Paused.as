@@ -17,16 +17,17 @@ package
 
 		public function Paused()
 		{
+			/*
 			_bg = new FlxSprite(20,20).makeGraphic(280, 72, 0xff808080);
 			_bg.scrollFactor.x = _bg.scrollFactor.y = 0;
 			add(_bg);
-
-			_field = new FlxText(_bg.x,_bg.y+16, 300, "Paused");
+*/
+			_field = new FlxText(20,20+16, 300, "Paused");
 			_field.setFormat(null, 12, 0xff00FFFF, "center");
 			_field.scrollFactor.x = _field.scrollFactor.y = 0;
 			add(_field);
 			
-			_unpause = new FlxText(_bg.x,_bg.y+32, 300,
+			_unpause = new FlxText(20,20+32, 300,
 				"Press space to unpause");
 			_unpause.setFormat(null, 10, 0xff00FFFF, "center");
 			_unpause.scrollFactor.x = _unpause.scrollFactor.y = 0;

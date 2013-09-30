@@ -24,6 +24,8 @@ package org.flixel
 	 */
 	public class FlxG
 	{
+		static public var timer:Number = 0;
+		
 		/**
 		 * If you build and maintain your own version of flixel,
 		 * you can give it your own name here.

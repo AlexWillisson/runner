@@ -1,7 +1,6 @@
 package
 {
 	import org.flixel.*;
-	
 	public class PlayState extends FlxState
 	{
 		//private var background:FlxSprite;
@@ -16,7 +15,8 @@ package
 		private var groundIdx:int = 14;
 		public var paused:Paused;
 		public var allowHills:Boolean;
-		
+		public var timerNum:Number = 0;
+		public var timerText:FlxText;
 		public function PlayState():void
 		{
 			
@@ -82,16 +82,30 @@ package
 			firstleg.y = FlxG.height - 31;
 			add(firstleg);
 
+			timerText = new FlxText(0, 0, 100, " ");
+			timerText.size = 16;
+			add(timerText); 
+			timerText.scrollFactor.x = 0;
+			timerText.scrollFactor.y = 0;
+			
 			paused = new Paused;	//adding pause functionality
 			super.create();
 
 		}
-
+		
 		override public function update():void
 		{
+			
 			if (!paused.showing)
 			{
+<<<<<<< HEAD
 				background.draw();
+=======
+				timerNum += FlxG.elapsed;
+				FlxG.timer = timerNum;
+				timerText.text = "" + FlxU.floor(timerNum);
+				
+>>>>>>> 82f35db838d6ff8931a3b68e2744e450d11e504e
 				if (player.x > 640) {
 					player.x = startX;
 
