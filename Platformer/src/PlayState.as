@@ -50,27 +50,27 @@ package
 			FlxG.camera.follow(player.camTar)
 			
 			firstLeg = new Limb(Sources.Leg);
-			firstLeg.x = 70;
+			firstLeg.x = 90;
 			firstLeg.y = FlxG.height - 31;
 			add(firstLeg);
 
 			secondLeg = new Limb(Sources.Leg);
-			secondLeg.x = 90;
+			secondLeg.x = 110;
 			secondLeg.y = FlxG.height - 31;
 			add(secondLeg);
 
 			firstArm = new Limb(Sources.Arm);
-			firstArm.x = 110
+			firstArm.x = 130
 			firstArm.y = FlxG.height - 31;
 			add(firstArm);
 
 			secondArm = new Limb(Sources.Arm);
-			secondArm.x = 130;
+			secondArm.x = 150;
 			secondArm.y = FlxG.height - 31;
 			add(secondArm);
 
 			head = new Limb(Sources.Head);
-			head.x = 150;
+			head.x = 170;
 			head.y = FlxG.height - 31;
 			add(head);
 
