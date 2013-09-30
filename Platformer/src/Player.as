@@ -61,19 +61,17 @@ package
 		{
 			var justJumped:Boolean = false
 
-			if (FlxG.keys.UP || FlxG.keys.W) {
+			if (FlxG.keys.justPressed("UP") || FlxG.keys.justPressed("W")) {
 				if (leg1 && (touching & DOWN)) {
 					velocity.y = jumpHeight;
 					justJumped = true
 					play("jump");
-				} else if (leg2 && !doubleJumped && velocity.y > 0) {
-					velocity.y = jumpHeight;
+				} else if (leg2 && !doubleJumped) {
+					velocity.y += jumpHeight;
 					justJumped = true
 					doubleJumped = true
 				}
-			}
-
-			if ((touching & DOWN) && !justJumped) {
+			} else if (touching & DOWN) {
 				doubleJumped = false
 				play("walk");
 			}
